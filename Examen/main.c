@@ -44,13 +44,6 @@ int main(int argc, char** argv) {
             *pInver++ = 0;
 
         }
-
-    }
-
-
-    //Segundo cuarto
-    for (fila = 0; fila < mitad; fila++) {
-
         pImg = (unsigned char *) Img->imageData + (fila) * Img->widthStep + columna * Img->nChannels;
         pInver = (unsigned char *) Invertida->imageData + fila * Invertida->widthStep + columna * Invertida->nChannels;
 
@@ -67,10 +60,6 @@ int main(int argc, char** argv) {
 
         }
 
-    }
-    //Tercer cuarto
-    for (fila = 0; fila < mitad; fila++) {
-
         pImg = (unsigned char *) Img->imageData + (fila + Img->width / 2) * Img->widthStep;
         pInver = (unsigned char *) Invertida->imageData + (fila + Invertida->width / 2) * Invertida->widthStep;
 
@@ -86,13 +75,6 @@ int main(int argc, char** argv) {
 
 
         }
-
-    }
-
-
-    //Cuarto cuarto
-    for (fila = 0; fila < mitad; fila++) {
-
         pImg = (unsigned char *) Img->imageData + (fila + Img->width / 2) * Img->widthStep + columna * Img->nChannels;
         pInver = (unsigned char *) Invertida->imageData + (fila + Invertida->width / 2) * Invertida->widthStep + (columna) * Invertida->nChannels;
 
@@ -108,6 +90,7 @@ int main(int argc, char** argv) {
         }
 
     }
+
 
 
 
