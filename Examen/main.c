@@ -92,15 +92,6 @@ int main(int argc, char** argv) {
     }
 
 
-
-
-
-
-
-
-
-
-
     // a visualization window is created with title 'image'
     cvNamedWindow(argv[1], CV_WINDOW_NORMAL);
     // img is shown in 'image' window
