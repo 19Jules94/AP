@@ -7,27 +7,29 @@
 
 #define ALTOBLOQUE 32
 #define ANCHOBLOQUE 32
-int fila, columna;
+
 unsigned char *pOrigen;
 unsigned char *pDestino;
 
-void copiarBloque(int i, int j, IplImage * ImgOrigen, int k, int l, IplImage *ImgDestino) {
+void copiarBloque(int filaBloque1, int columnaBloque1, IplImage * ImgOrigen, int filaBloque2, int columnaBloque2, IplImage *ImgDestino) {
 
-    for (i = 0; i < ALTOBLOQUE; i++) {
+    int fila, columna;
+    //COPIAMOS EL BLOQUE
+    for (fila = 0; fila < ALTOBLOQUE; fila++) {
 
+        pOrigen = (unsigned char *) (ImgOrigen->imageData + (filaBloque1 + fila) * ImgOrigen->widthStep + columnaBloque1 * ImgOrigen->nChannels);
+        pDestino = (unsigned char *) (ImgDestino->imageData + (filaBloque2 + fila) * ImgDestino->widthStep + columnaBloque2 * ImgDestino->nChannels);
 
-        for (j = 0; j < ANCHOBLOQUE; j++) {
-            pOrigen = (unsigned char *) ImgOrigen->imageData + ((fila + i) * ImgOrigen->widthStep)+((columna + j) * ImgOrigen->nChannels);
-            pDestino = (unsigned char *) ImgDestino->imageData + ((fila + i) * ImgDestino->widthStep)+((columna + j) * ImgDestino->nChannels);
+        for (columna = 0; columna < ANCHOBLOQUE; columna++) {
 
             *pDestino++ = *pOrigen++;
             *pDestino++ = *pOrigen++;
             *pDestino++ = *pOrigen++;
-
         }
 
 
     }
+
 
 
 }
@@ -53,22 +55,18 @@ int main(int argc, char** argv) {
     cvShowImage(argv[1], Img);
 
     cvWaitKey(0);
-
-
+    int fila, columna;
     for (fila = 0; fila < Img->height; fila += ALTOBLOQUE) {
 
         for (columna = 0; columna < Img->width; columna += ANCHOBLOQUE) {
 
-            copiarBloque(fila, columna, Img, fila, columna, Img2);
-            cvShowImage(argv[1], Img2);
-            cvWaitKey(5);
+            copiarBloque(fila, columna, Img, fila, columna,Img2);
+            cvShowImage("FOTO", Img2);
+            cvWaitKey(1);
         }
 
+
     }
-
-
-
-
     cvReleaseImage(&Img);
     cvReleaseImage(&Img2);
     cvDestroyWindow(argv[1]);
